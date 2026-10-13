@@ -1,0 +1,24 @@
+---
+name: Build
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+  workflow_dispatch: {}
+  schedule:
+    - cron: 0 0 * * 1
+
+permissions:
+  contents: read
+  pull-requests: read
+
+jobs:
+  golang-checks:
+    name: Golang checks
+    uses: bodgit/workflows/.github/workflows/golang-checks.yml@dd43086767b331dc0010100dd2a304663999f80a # v1.0.2
+    with:
+      go_test_args: -v -short
